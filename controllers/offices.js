@@ -11,9 +11,20 @@ const getAllRecords = (req, res) => {
   });
 };
 
+//@GET
+//@gets records by city
+const allByCity = (req, res) => {
+  let sql = `SELECT * FROM db9201_dentalDB.OFFICES WHERE city LIKE ?`;
+  sql = mysql.format(sql, [`${req.params.city}%`]);
+
+  pool.query(sql, (err, rows) => {
+    if (err) return handleSQLError(res, err);
+    return res.json(rows);
+  });
+};
+
 //@GET route
 //@gets all records by state
-//@not restricted
 const allByState = (req, res) => {
   let sql = `SELECT * FROM db9201_dentalDB.OFFICES WHERE state = ?`;
   sql = mysql.format(sql, [req.params.state]);
@@ -26,7 +37,6 @@ const allByState = (req, res) => {
 
 //@GET route
 //@gets all records by zip
-//@not restricted
 const allByZip = (req, res) => {
   let sql = `SELECT * FROM db9201_dentalDB.OFFICES WHERE zip = ? `;
   sql = mysql.format(sql, [req.params.zip]);
@@ -37,4 +47,4 @@ const allByZip = (req, res) => {
   });
 };
 
-module.exports = { getAllRecords, allByState, allByZip };
+module.exports = { getAllRecords, allByState, allByZip, allByCity };
