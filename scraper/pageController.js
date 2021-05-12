@@ -10,7 +10,7 @@ const scrapeAll = async (browserInstance) => {
     scrapedData = await pageScraper.scraper(browser);
     await browser.close();
     //writes scraped data to json file
-    fs.writeFile('101-120.json', JSON.stringify(scrapedData), 'utf8', function (
+    fs.writeFile('121-130.json', JSON.stringify(scrapedData), 'utf8', function (
       err
     ) {
       if (err) {
